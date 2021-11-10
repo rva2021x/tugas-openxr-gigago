@@ -126,8 +126,7 @@ public class ControllerManager : MonoBehaviour
                 m_XRController = m_GO.GetComponent<XRController>();
                 m_LineRenderer = m_GO.GetComponent<XRInteractorLineVisual>();
                 m_Interactor = m_GO.GetComponent<XRBaseInteractor>();
-
-                Leave();               
+                Leave();
             }
         }
 
@@ -163,7 +162,7 @@ public class ControllerManager : MonoBehaviour
             {
                 m_XRController.enableInputActions = false;
             }
-            if(m_Interactor)
+            if (m_Interactor)
             {
                 m_Interactor.enabled = false;
             }
@@ -183,7 +182,7 @@ public class ControllerManager : MonoBehaviour
         /// <summary>
         /// the Teleport state is used to interact with teleport interactors and queue teleportations.
         /// </summary>
-        Teleport = 1,        
+        Teleport = 1,
         /// <summary>
         /// Maximum sentinel
         /// </summary>
@@ -250,10 +249,10 @@ public class ControllerManager : MonoBehaviour
 
             if (m_State != ControllerStates.MAX)
             {
-                m_Interactors[(int)m_State].Leave();                    
+                m_Interactors[(int)m_State].Leave();
             }
 
-            m_State = nextState;           
+            m_State = nextState;
             m_Interactors[(int)m_State].Enter();
         }
     }
@@ -292,7 +291,7 @@ public class ControllerManager : MonoBehaviour
         if (connectedDevice.isValid)
         {
 #if UNITY_2019_3_OR_NEWER
-            if((connectedDevice.characteristics & InputDeviceCharacteristics.Left) != 0)
+            if ((connectedDevice.characteristics & InputDeviceCharacteristics.Left) != 0)
 #else
             if (connectedDevice.role == InputDeviceRole.LeftHanded)
 #endif
@@ -307,9 +306,9 @@ public class ControllerManager : MonoBehaviour
             else if (connectedDevice.role == InputDeviceRole.RightHanded)
 #endif
             {
-                m_RightController = connectedDevice;          
+                m_RightController = connectedDevice;
                 m_RightControllerState.ClearAll();
-                m_RightControllerState.SetState(ControllerStates.Select);                                
+                m_RightControllerState.SetState(ControllerStates.Select);
             }
         }
     }
@@ -341,7 +340,7 @@ public class ControllerManager : MonoBehaviour
             {
                 m_LeftControllerState.SetState(ControllerStates.Select);
 
-                if(!activated)
+                if (!activated)
                     m_LeftTeleportDeactivated = false;
             }
         }
