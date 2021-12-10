@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour
     {
         if (!visible)
         {
-            transform.localScale = oldScale;
+            transform.DOScale(oldScale, 0.15f);
         }
         float duration = animationDurationMultiplier * (newHealth / maxHealth);
 
