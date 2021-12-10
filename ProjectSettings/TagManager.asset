@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Projectile
+  - Magic
+  - Fire
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Teleport
   - Water
   - UI
   - Magic

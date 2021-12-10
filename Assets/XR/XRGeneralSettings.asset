@@ -15,7 +15,22 @@ MonoBehaviour:
   m_RequiresSettingsUpdate: 0
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
-  m_Loaders: []
+  m_Loaders:
+  - {fileID: 11400000, guid: 01917ffc966563c40a14703a0083ba28, type: 2}
+--- !u!114 &-5450937478211767668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
+  m_Name: WebGL Settings
+  m_EditorClassIdentifier: 
+  m_LoaderManagerInstance: {fileID: -1199979159210095032}
+  m_InitManagerOnStart: 1
 --- !u!114 &-4455830838985946651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,6 +62,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: -4455830838985946651}
   m_InitManagerOnStart: 1
+--- !u!114 &-1199979159210095032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c3631f5e58749a59194e0cf6baf6d5, type: 3}
+  m_Name: WebGL Providers
+  m_EditorClassIdentifier: 
+  m_RequiresSettingsUpdate: 0
+  m_AutomaticLoading: 0
+  m_AutomaticRunning: 0
+  m_Loaders: []
 --- !u!114 &-174455733035088795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,13 +106,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dc886499c26824283350fa532d087d, type: 3}
   m_Name: XRGeneralSettings
   m_EditorClassIdentifier: 
-  Keys: 010000001c00000007000000040000000e000000
+  Keys: 010000001c00000007000000040000000e0000000d000000
   Values:
   - {fileID: -2311700196129055955}
   - {fileID: 1660259831620839145}
   - {fileID: 8991177285536209095}
   - {fileID: 3599666237599922500}
   - {fileID: 1719271853052215256}
+  - {fileID: -5450937478211767668}
 --- !u!114 &1660259831620839145
 MonoBehaviour:
   m_ObjectHideFlags: 0
