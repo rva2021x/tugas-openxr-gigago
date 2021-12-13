@@ -6,9 +6,15 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private MonsterAnimator monsterAnimator;
     [SerializeField] private NavMeshAgent agent;
+    [Range(0f, 1f)]
+    [SerializeField] private int searching;
+    [SerializeField] private Transform[] waypoint;
+    [SerializeField] private int waypointIndex = 0;
+    [SerializeField] private float waypointDist;
 
     [SerializeField] private string playerName;
     [SerializeField] private Transform playerTransform;
+    private Vector3 target;
 
     [SerializeField] private LayerMask layerGround, layerPlayer;
 
@@ -40,11 +46,23 @@ public class MonsterBehaviour : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange)
         {
-            Patrolling();
+            monsterAnimator.CharacterWalk();
+            monsterAnimator.CharacterNotFoundEnemy();
+            if (searching == 0)
+            {
+                Patrolling();
+            }
+
+            else
+            {
+                Wandering();
+            }
+
         }
-        
-        else if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        else if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        else if (playerInSightRange && !playerInAttackRange) 
+            ChasePlayer();
+        else if (playerInSightRange && playerInAttackRange) 
+            AttackPlayer();
     }
 
     private void Idle()
@@ -54,15 +72,21 @@ public class MonsterBehaviour : MonoBehaviour
 
     private void Patrolling()
     {
-        monsterAnimator.CharacterWalk();
-        monsterAnimator.CharacterNotFoundEnemy();
+        target = waypoint[waypointIndex].position;
+        agent.SetDestination(target);
 
-        if (!walkPointSet) SearchWalkPoint();
+        if(Vector3.Distance(transform.position, target) < 1)
+            IterateWaypointIndex();
+    }
+
+    private void Wandering()
+    {
+        if (!walkPointSet) 
+            SearchWalkPoint();
 
         if (walkPointSet)
-        {
             agent.SetDestination(walkPoint);
-        }
+        
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
@@ -125,5 +149,14 @@ public class MonsterBehaviour : MonoBehaviour
     private void MonsterDie()
     {
         Destroy(gameObject);
+    }
+
+    private void IterateWaypointIndex()
+    {
+        waypointIndex++;
+        if(waypointIndex == waypoint.Length)
+        {
+            waypointIndex = 0;
+        }
     }
 }
