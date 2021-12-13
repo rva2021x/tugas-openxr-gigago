@@ -8,6 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Wand : MonoBehaviour
 {
     [SerializeField] private List<GameObject> projectiles = new List<GameObject>();
+    [SerializeField] private List<Vector3> firepointPos = new List<Vector3>();
     [SerializeField] private ShootProjectile shooter;
     [SerializeField] private WandUI ui;
 
@@ -22,6 +23,7 @@ public class Wand : MonoBehaviour
     {
         index = (index + 1) % projectiles.Count;
         shooter.setProjectile(projectiles[index]);
+        shooter.setFirePoint(firepointPos[index]);
         ui.Cycle();
     }
 }

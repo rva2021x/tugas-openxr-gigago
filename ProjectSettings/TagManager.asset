@@ -7,6 +7,7 @@ TagManager:
   - Projectile
   - Magic
   - Fire
+  - TrainingTarget
   layers:
   - Default
   - TransparentFX

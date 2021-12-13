@@ -14,6 +14,10 @@ public class ShootProjectile : MonoBehaviour
     {
         currentProjectile = projectile;
     }
+    public void setFirePoint(Vector3 pos)
+    {
+        firePoint.position = pos;
+    }
 
     public void Shoot()
     {
@@ -35,15 +39,19 @@ public class ShootProjectile : MonoBehaviour
             {
                 projectileObj.transform.GetChild(0).transform.position = firePoint.position;
                 projectileObj.transform.GetChild(1).transform.position = destination;
+                if(hit.collider != null && hit.collider.gameObject.tag == "TrainingTarget"){
+                    TrainingTarget target = hit.collider.GetComponent<TrainingTarget>();
+                    target.kill();
+                }
             }
             else if (currentProjectile.GetComponent<Projectile>().magicType == Projectile.Magic.wind)
             {
-                projectileObj.transform.localRotation = Quaternion.LookRotation((destination - firePoint.position).normalized, Vector3.up);
                 projectileObj.transform.parent = firePoint.parent;
-                projectileObj.transform.localPosition += new Vector3(4, 0, 0);
+                projectileObj.transform.localRotation = Quaternion.LookRotation((destination - firePoint.position).normalized, Vector3.up);
             }
             else
             {
+                projectileObj.transform.localRotation = Quaternion.LookRotation((destination - firePoint.position).normalized, Vector3.up);
                 projectileObj.GetComponent<Rigidbody>().velocity = (destination - firePoint.position).normalized * projectileSpeed;
             }
         }
