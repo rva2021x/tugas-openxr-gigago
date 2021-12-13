@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class MonsterBehaviour : MonoBehaviour
 {
     [SerializeField] private float health;
+    [SerializeField] private MonsterAnimator monsterAnimator;
     [SerializeField] private NavMeshAgent agent;
 
     [SerializeField] private string playerName;
@@ -28,6 +29,7 @@ public class MonsterBehaviour : MonoBehaviour
     private void Awake()
     {
         playerTransform = GameObject.Find(playerName).transform;
+        monsterAnimator = GetComponent<MonsterAnimator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -36,18 +38,28 @@ public class MonsterBehaviour : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, layerPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, layerPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patrolling();
+        if (!playerInSightRange && !playerInAttackRange)
+        {
+            Patrolling();
+        }
+        
         else if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         else if (playerInSightRange && playerInAttackRange) AttackPlayer();
-
     }
 
+    private void Idle()
+    {
+        monsterAnimator.CharacterStopWalk();
+    }
 
     private void Patrolling()
     {
+        monsterAnimator.CharacterWalk();
+        monsterAnimator.CharacterNotFoundEnemy();
+
         if (!walkPointSet) SearchWalkPoint();
 
-        if(walkPointSet)
+        if (walkPointSet)
         {
             agent.SetDestination(walkPoint);
         }
@@ -78,7 +90,8 @@ public class MonsterBehaviour : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(playerTransform.position);
-
+        monsterAnimator.CharacterWalk();
+        monsterAnimator.CharacterFoundEnemy();
     }
     private void AttackPlayer()
     {
@@ -89,7 +102,7 @@ public class MonsterBehaviour : MonoBehaviour
         {
             //Attack
 
-
+            monsterAnimator.CharacterAttackEnemy();
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
