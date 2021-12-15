@@ -10,8 +10,7 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
-    [Range(0f, 1f)]
-    [SerializeField] private int searching;
+
     [SerializeField] private Transform[] waypoint;
     private int waypointIndex = 0;
     private float waypointDist;
@@ -50,15 +49,8 @@ public class MonsterBehaviour : MonoBehaviour
         {
             monsterAnimator.CharacterWalk();
             monsterAnimator.CharacterNotFoundEnemy();
-            if (searching == 0)
-            {
-                Patrolling();
-            }
-
-            else
-            {
-                Wandering();
-            }
+            
+            Patrolling();
 
         }
         else if (playerInSightRange && !playerInAttackRange) 
@@ -82,40 +74,6 @@ public class MonsterBehaviour : MonoBehaviour
         if(Vector3.Distance(transform.position, target) < 1)
             IterateWaypointIndex();
     }
-
-    private void Wandering()
-    {
-        agent.speed = walkSpeed;
-
-        if (!walkPointSet) 
-            SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-        
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //Walkpoint
-        if(distanceToWalkPoint.magnitude < 1f)
-        {
-            walkPointSet = false;
-        }
-    }
-
-    private void SearchWalkPoint()
-    {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-    
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, layerGround))
-        {
-            walkPointSet = true;
-        }
-    }
-
 
     private void ChasePlayer()
     {
@@ -170,4 +128,44 @@ public class MonsterBehaviour : MonoBehaviour
             waypointIndex = 0;
         }
     }
+
+
+
+
+
+    /*
+    private void Wandering()
+    {
+        agent.speed = walkSpeed;
+
+        if (!walkPointSet) 
+            SearchWalkPoint();
+
+        if (walkPointSet)
+            agent.SetDestination(walkPoint);
+        
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        //Walkpoint
+        if(distanceToWalkPoint.magnitude < 1f)
+        {
+            walkPointSet = false;
+        }
+    }
+
+    private void SearchWalkPoint()
+    {
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+    
+        if(Physics.Raycast(walkPoint, -transform.up, 2f, layerGround))
+        {
+            walkPointSet = true;
+        }
+    }
+    */
+
 }
