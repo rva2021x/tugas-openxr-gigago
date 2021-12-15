@@ -6,10 +6,16 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private MonsterAnimator monsterAnimator;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform playerTransform;
+
+    [SerializeField] private bool rangeAttack;
+    [SerializeField] private float rangeSpeedAttack;
+    [SerializeField] private GameObject projectileAttack;
+    [SerializeField] private Transform attackPosition;
     private Vector3 target;
     [SerializeField] private float health;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
+
 
     [SerializeField] private Transform[] waypoint;
     private int waypointIndex = 0;
@@ -91,7 +97,18 @@ public class MonsterBehaviour : MonoBehaviour
 
         if(!alreadyAttacked)
         {
-            //Attack
+            //Attack Projectile
+            if (rangeAttack && !alreadyAttacked)
+            {
+                Rigidbody rigidbody = Instantiate(projectileAttack, attackPosition.position, Quaternion.identity).GetComponent<Rigidbody>();
+                rigidbody.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            }
+
+            //Attack Melee
+            else
+            {
+
+            }
 
             monsterAnimator.CharacterAttackEnemy();
             alreadyAttacked = true;
@@ -118,6 +135,11 @@ public class MonsterBehaviour : MonoBehaviour
     {
         agent.speed = 0f;
         Destroy(gameObject);
+    }
+
+    private void DestroyProjectile(Rigidbody gb)
+    {
+        Destroy(gb);
     }
 
     private void IterateWaypointIndex()

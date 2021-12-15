@@ -2263,6 +2263,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 871425cee08e7304faaecc65aee8314f, type: 3}
+--- !u!1 &584154954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584154955}
+  m_Layer: 0
+  m_Name: Projectile Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584154955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584154954}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1383782946}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &585561671
 GameObject:
   m_ObjectHideFlags: 0
@@ -4475,9 +4505,29 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4888942306538752528, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
+      propertyPath: rangeAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888942306538752528, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
+      propertyPath: attackPosition
+      value: 
+      objectReference: {fileID: 584154955}
+    - target: {fileID: 4888942306538752528, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 104397710}
+    - target: {fileID: 4888942306538752528, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
+      propertyPath: projectileAttack
+      value: 
+      objectReference: {fileID: 7447614972333886104, guid: 20e6d4a0a0b6eda4eb0e203e42e3a68e, type: 3}
+    - target: {fileID: 4888942306538752528, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
+      propertyPath: rangeSpeedAttack
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888942306538752528, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4888942306538752528, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
       propertyPath: waypoint.Array.size
       value: 5
