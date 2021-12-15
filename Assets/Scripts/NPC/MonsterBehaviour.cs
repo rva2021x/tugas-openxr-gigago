@@ -3,18 +3,18 @@ using UnityEngine.AI;
 
 public class MonsterBehaviour : MonoBehaviour
 {
-    [SerializeField] private float health;
     [SerializeField] private MonsterAnimator monsterAnimator;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Transform playerTransform;
+    private Vector3 target;
+    [SerializeField] private float health;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
     [Range(0f, 1f)]
     [SerializeField] private int searching;
     [SerializeField] private Transform[] waypoint;
-    [SerializeField] private int waypointIndex = 0;
-    [SerializeField] private float waypointDist;
-
-    [SerializeField] private string playerName;
-    [SerializeField] private Transform playerTransform;
-    private Vector3 target;
+    private int waypointIndex = 0;
+    private float waypointDist;
 
     [SerializeField] private LayerMask layerGround, layerPlayer;
 
@@ -34,7 +34,9 @@ public class MonsterBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        playerTransform = GameObject.Find(playerName).transform;
+        if (playerTransform == null)
+            Debug.LogWarning("NO TARGET");
+
         monsterAnimator = GetComponent<MonsterAnimator>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -68,10 +70,12 @@ public class MonsterBehaviour : MonoBehaviour
     private void Idle()
     {
         monsterAnimator.CharacterStopWalk();
+        agent.speed = 0f;
     }
 
     private void Patrolling()
     {
+        agent.speed = walkSpeed;
         target = waypoint[waypointIndex].position;
         agent.SetDestination(target);
 
@@ -81,6 +85,8 @@ public class MonsterBehaviour : MonoBehaviour
 
     private void Wandering()
     {
+        agent.speed = walkSpeed;
+
         if (!walkPointSet) 
             SearchWalkPoint();
 
@@ -113,12 +119,15 @@ public class MonsterBehaviour : MonoBehaviour
 
     private void ChasePlayer()
     {
+        agent.speed = runSpeed;
+
         agent.SetDestination(playerTransform.position);
         monsterAnimator.CharacterWalk();
         monsterAnimator.CharacterFoundEnemy();
     }
     private void AttackPlayer()
     {
+        agent.speed = 0f;
         agent.SetDestination(transform.position);
         transform.LookAt(playerTransform);
 
@@ -139,6 +148,7 @@ public class MonsterBehaviour : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        agent.speed = 0f;
         health -= damage;
         if(health < 0)
         {
@@ -148,6 +158,7 @@ public class MonsterBehaviour : MonoBehaviour
 
     private void MonsterDie()
     {
+        agent.speed = 0f;
         Destroy(gameObject);
     }
 
