@@ -19,6 +19,7 @@ public class Wand : MonoBehaviour
         shooter.setProjectile(projectiles[index]);
     }
 
+    [ContextMenu("Cycle")]
     public void Cycle()
     {
         index = (index + 1) % projectiles.Count;
