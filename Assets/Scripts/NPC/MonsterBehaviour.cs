@@ -163,7 +163,7 @@ public class MonsterBehaviour : Entity
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         agent.speed = 0f;
         health -= damage;
