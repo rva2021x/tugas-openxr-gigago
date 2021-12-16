@@ -42,7 +42,9 @@ public class ShootProjectile : MonoBehaviour
                 if(hit.collider != null && hit.collider.gameObject.tag == "TrainingTarget"){
                     TrainingTarget target = hit.collider.GetComponent<TrainingTarget>();
                     target.kill();
-                }
+                }else if(hit.collider != null && hit.collider.TryGetComponent<MonsterBehaviour>(out MonsterBehaviour mb)) {
+                    mb.TakeDamage(10);
+				}
             }
             else if (currentProjectile.GetComponent<Projectile>().magicType == Projectile.Magic.wind)
             {
