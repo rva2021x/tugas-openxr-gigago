@@ -17,13 +17,15 @@ public class GameOver : MonoBehaviour
     [SerializeField] private UITimer timer;
     [SerializeField] private Transform playerPos;
 
-    public void showGameOver(){
+    public void showGameOver()
+    {
+        Time.timeScale = 0f;
         Vector3 offset = playerPos.forward;
         offset *= 2f;
         this.gameObject.transform.position = playerPos.position + offset;
 
         transform.GetChild(0).gameObject.SetActive(true);
-        
+
         timeVal = timer.GetTimer();
         int minutes = Mathf.FloorToInt(timeVal / 60F);
         int seconds = Mathf.FloorToInt(timeVal % 60F);
@@ -35,19 +37,26 @@ public class GameOver : MonoBehaviour
         scoreVal = (enemyKilled * 30) + (Mathf.FloorToInt(timeVal) * 10);
         score.text = scoreVal.ToString();
 
-        if(scoreVal > PlayerPrefs.GetInt("HighScore", 0)){
+        if (scoreVal > PlayerPrefs.GetInt("HighScore", 0))
+        {
             PlayerPrefs.SetInt("HighScore", scoreVal);
             highScore.text = "New high score!";
-        }else{
+        }
+        else
+        {
             highScore.text = "High score: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
         }
     }
 
-    public void BackToMenu(){
+    public void BackToMenu()
+    {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
     }
 
-    public void Restart(){
+    public void Restart()
+    {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
