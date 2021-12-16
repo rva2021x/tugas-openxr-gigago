@@ -19,7 +19,6 @@ public class GameOver : MonoBehaviour
 
     public void showGameOver()
     {
-        Time.timeScale = 0f;
         Vector3 offset = playerPos.forward;
         offset *= 2f;
         this.gameObject.transform.position = playerPos.position + offset;
@@ -50,13 +49,11 @@ public class GameOver : MonoBehaviour
 
     public void BackToMenu()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
     }
 
     public void Restart()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

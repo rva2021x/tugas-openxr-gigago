@@ -1016,8 +1016,8 @@ MonoBehaviour:
   agent: {fileID: 0}
   playerTransform: {fileID: 0}
   rangeAttack: 1
-  rangeSpeedAttack: 32
-  projectileAttack: {fileID: 7447614972333886104, guid: 20e6d4a0a0b6eda4eb0e203e42e3a68e, type: 3}
+  rangeSpeedAttack: 10
+  projectileAttack: {fileID: 2457884455171875738, guid: af2fe9fb6e9e7c9469f42d1aab1cd120, type: 3}
   attackPosition: {fileID: 584154955}
   walkSpeed: 4
   runSpeed: 8
@@ -1036,6 +1036,7 @@ MonoBehaviour:
     m_Bits: 128
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10
+  attackSound: {fileID: 6136537508999643935}
   timeBetweenAttacks: 5
   sightRange: 30
   attackRange: 15
@@ -1115,17 +1116,17 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2340886850689985114, guid: fbe7ca7d79237aa46b1b109413a57081, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8c56a94a76fd50249be8ff6e8d9d9c73, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 6c5f35015c1bced45b8d76eefc4670a4, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 20
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
