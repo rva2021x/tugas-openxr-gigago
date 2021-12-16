@@ -57,8 +57,24 @@ public class MonsterBehaviour : Entity
         agent = GetComponent<NavMeshAgent>();
     }
 
+    private bool isPause;
+    private float tempSpeed;
+    public void Pause() {
+        isPause = true;
+        tempSpeed = agent.speed;
+        agent.speed = 0;
+	}
+
+    public void Resume() {
+        isPause = false;
+        agent.speed = tempSpeed;
+    }
+
     private void Update()
     {
+		if (isPause) {
+            return;
+		}
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, layerPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, layerPlayer);
 
