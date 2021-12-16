@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -17,8 +18,11 @@ public class GameOver : MonoBehaviour
     [SerializeField] private UITimer timer;
     [SerializeField] private Transform playerPos;
 
+    public UnityEvent gameOverEvent;
+
     public void showGameOver()
     {
+        gameOverEvent.Invoke();
         Vector3 offset = playerPos.forward;
         offset *= 2f;
         this.gameObject.transform.position = playerPos.position + offset;

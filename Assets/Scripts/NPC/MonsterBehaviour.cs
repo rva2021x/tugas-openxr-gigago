@@ -43,16 +43,19 @@ public class MonsterBehaviour : Entity
 
     private void Awake()
     {
-        if (playerTransform == null) {
+        if (playerTransform == null)
+        {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        if(waypoint[0] == null) {
+        if (waypoint[0] == null)
+        {
             Transform wayTransform = GameObject.FindGameObjectWithTag("Waypoint").transform;
             waypoint = new Transform[wayTransform.childCount];
-            for(int i = 0; i < wayTransform.childCount; i++) {
+            for (int i = 0; i < wayTransform.childCount; i++)
+            {
                 waypoint[i] = wayTransform.GetChild(i);
-			}
-		}
+            }
+        }
         monsterAnimator = GetComponent<MonsterAnimator>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -60,25 +63,40 @@ public class MonsterBehaviour : Entity
     private bool isPause;
     private float tempSpeed;
     private float animatorSpeed;
-    public void Pause() {
+    public void Pause()
+    {
         isPause = true;
         tempSpeed = agent.speed;
         agent.speed = 0;
         animatorSpeed = monsterAnimator.CharacterAnimator.speed;
         monsterAnimator.CharacterAnimator.speed = 0;
-	}
+    }
 
-    public void Resume() {
+    public void Resume()
+    {
         isPause = false;
         agent.speed = tempSpeed;
         monsterAnimator.CharacterAnimator.speed = animatorSpeed;
     }
 
+    private void Start()
+    {
+        GameOver go = GameObject.Find("Game Over")?.GetComponent<GameOver>();
+        if (go != null)
+        {
+            go.gameOverEvent.AddListener(() =>
+            {
+                Pause();
+            });
+        }
+    }
+
     private void Update()
     {
-		if (isPause) {
+        if (isPause)
+        {
             return;
-		}
+        }
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, layerPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, layerPlayer);
 
@@ -86,13 +104,13 @@ public class MonsterBehaviour : Entity
         {
             monsterAnimator.CharacterWalk();
             monsterAnimator.CharacterNotFoundEnemy();
-            
+
             Patrolling();
 
         }
-        else if (playerInSightRange && !playerInAttackRange) 
+        else if (playerInSightRange && !playerInAttackRange)
             ChasePlayer();
-        else if (playerInSightRange && playerInAttackRange) 
+        else if (playerInSightRange && playerInAttackRange)
             AttackPlayer();
     }
 
@@ -108,7 +126,7 @@ public class MonsterBehaviour : Entity
         target = waypoint[waypointIndex].position;
         agent.SetDestination(target);
 
-        if(Vector3.Distance(transform.position, target) < 1)
+        if (Vector3.Distance(transform.position, target) < 1)
             IterateWaypointIndex();
         Debug.Log("Patrolling");
     }
@@ -124,7 +142,8 @@ public class MonsterBehaviour : Entity
         Debug.Log("Chase Player");
 
     }
-    private void AttackPlayer() {
+    private void AttackPlayer()
+    {
         agent.SetDestination(transform.position);
         transform.LookAt(playerTransform);
         Debug.Log("Attack Player");
@@ -145,12 +164,14 @@ public class MonsterBehaviour : Entity
             //Attack Melee
             else
             {
-                if(playerTransform.TryGetComponent(out PlayerBehaviour player)) {
+                if (playerTransform.TryGetComponent(out PlayerBehaviour player))
+                {
                     player.health -= 10;
-				}
-				if (attackSound) {
+                }
+                if (attackSound)
+                {
                     attackSound.Play();
-				}
+                }
             }
 
             alreadyAttacked = true;
@@ -167,8 +188,10 @@ public class MonsterBehaviour : Entity
     {
         agent.speed = 0f;
         health -= damage;
-        if(health <= 0) {
-            if (vfxExplosion) {
+        if (health <= 0)
+        {
+            if (vfxExplosion)
+            {
                 Instantiate(vfxExplosion, transform.position, Quaternion.identity);
             }
             GameObject gameOver = GameObject.FindWithTag("GameOver");
@@ -193,14 +216,16 @@ public class MonsterBehaviour : Entity
     private void IterateWaypointIndex()
     {
         waypointIndex++;
-        if(waypointIndex == waypoint.Length)
+        if (waypointIndex == waypoint.Length)
         {
             waypointIndex = 0;
         }
     }
 
-    private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Magic") {
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Magic")
+        {
             TakeDamage(10);
         }
     }
