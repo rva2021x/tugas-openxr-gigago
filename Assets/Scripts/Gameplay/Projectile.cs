@@ -1,3 +1,4 @@
+using Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,8 @@ public class Projectile : MonoBehaviour
         fire,
         ice,
         wind,
-        lightning
+        lightning,
+        enemy
     }
 
     public Magic magicType;
@@ -25,5 +27,10 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         Destroy(gameObject);
+        if(magicType == Magic.enemy) {
+            if(other.transform.TryGetComponent<PlayerBehaviour>(out PlayerBehaviour player)) {
+                player.health -= 10;
+			}
+		}
     }
 }

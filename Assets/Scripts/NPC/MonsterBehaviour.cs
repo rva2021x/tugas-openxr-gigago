@@ -1,3 +1,5 @@
+using AssetVariable;
+using Gameplay;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +17,7 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
+    [SerializeField] private GameObject vfxExplosion;
 
 
     [SerializeField] private Transform[] waypoint;
@@ -39,9 +42,16 @@ public class MonsterBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        if (playerTransform == null)
-            Debug.LogWarning("NO TARGET");
-
+        if (playerTransform == null) {
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        if(waypoint[0] == null) {
+            Transform wayTransform = GameObject.FindGameObjectWithTag("Waypoint").transform;
+            waypoint = new Transform[wayTransform.childCount];
+            for(int i = 0; i < wayTransform.childCount; i++) {
+                waypoint[i] = wayTransform.GetChild(i);
+			}
+		}
         monsterAnimator = GetComponent<MonsterAnimator>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -93,8 +103,7 @@ public class MonsterBehaviour : MonoBehaviour
         Debug.Log("Chase Player");
 
     }
-    private void AttackPlayer()
-    {
+    private void AttackPlayer() {
         agent.SetDestination(transform.position);
         transform.LookAt(playerTransform);
         Debug.Log("Attack Player");
@@ -115,7 +124,9 @@ public class MonsterBehaviour : MonoBehaviour
             //Attack Melee
             else
             {
-
+                if(playerTransform.TryGetComponent(out PlayerBehaviour player)) {
+                    player.health -= 10;
+				}
             }
 
             alreadyAttacked = true;
@@ -155,6 +166,15 @@ public class MonsterBehaviour : MonoBehaviour
         if(waypointIndex == waypoint.Length)
         {
             waypointIndex = 0;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Magic") {
+            if (vfxExplosion) {
+                Instantiate(vfxExplosion, transform.position, Quaternion.identity);
+            }
+            Destroy(this.gameObject);
         }
     }
 
