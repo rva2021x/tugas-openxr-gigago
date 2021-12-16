@@ -323,9 +323,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1625034217530728581}
-  pullAxis: {x: -1, y: 0, z: 0}
+  OnActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisabled:
+    m_PersistentCalls:
+      m_Calls: []
+  onHoverColor: {r: 0, g: 0, b: 0, a: 0}
+  onGrabColor: {r: 0, g: 0, b: 0, a: 0}
+  onActivatedColor: {r: 0, g: 0, b: 0, a: 0}
+  onDisabledColor: {r: 0, g: 0, b: 0, a: 0}
+  pullAxis: {x: 0, y: 1, z: 0}
   activatePull: 0.35
   pullLength: 0.5
+  isActivated: 0
 --- !u!114 &1625034218072870920
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,6 +38,11 @@ namespace UI {
         bool m_Held;
 
         [SerializeField] private Vector3 pullAxis = Vector3.forward;
+        private Vector3 PullAxis {
+			get {
+                return transform.localToWorldMatrix.MultiplyVector(pullAxis);
+			}
+		}
 
         [SerializeField] private float activatePull = 0.75f;
         [SerializeField] private float pullLength = 1f;
@@ -71,22 +76,22 @@ namespace UI {
 			if (m_Held) {
                 Vector3 currentObjectPosition = interactor.transform.position + handToObject;
 				Vector3 delta = currentObjectPosition - firstPosition;
-				float projected = Vector3.Dot(pullAxis.normalized, delta);
+				float projected = Vector3.Dot(PullAxis.normalized, delta);
                 float currentPull = (firstPosition - originalPosition).magnitude;
                 if(currentPull + projected > pullLength) {
                     projected = pullLength - currentPull;
 				}else if (currentPull + projected < 0) {
                     projected = -currentPull;
 				}
-				targetPosition = firstPosition + pullAxis * projected;
+				targetPosition = firstPosition + PullAxis.normalized * projected;
 			}
             transform.position = Vector3.Lerp(transform.position, targetPosition, .1f);
 		}
 
 		private void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + pullAxis.normalized * pullLength);
-            Gizmos.DrawSphere(transform.position + pullAxis.normalized * pullLength, 0.1f);
+            Gizmos.DrawLine(transform.position, transform.position + PullAxis.normalized * pullLength);
+            Gizmos.DrawSphere(transform.position + PullAxis.normalized * pullLength, 0.1f);
 		}
 
 		protected virtual void OnSelectEntered(SelectEnterEventArgs args) {
