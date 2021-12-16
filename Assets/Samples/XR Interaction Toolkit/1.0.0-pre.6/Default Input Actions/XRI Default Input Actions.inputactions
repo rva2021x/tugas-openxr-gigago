@@ -897,6 +897,52 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Custom",
+            "id": "a5963c44-8988-4d02-8299-f9fe08217043",
+            "actions": [
+                {
+                    "name": "Cycle",
+                    "type": "Button",
+                    "id": "572a959a-4db5-46e5-b627-bec808a573e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "7ae72bd5-6a1d-47a9-b208-95b7b8378022",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2128861f-5d11-479d-89a7-598058bcf165",
+                    "path": "<XRController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cycle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd5d8a93-49e7-4683-9c27-3a19b411b953",
+                    "path": "<XRController>/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

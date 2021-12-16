@@ -1820,7 +1820,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 602153567}
         m_TargetAssemblyTypeName: UITimer, Assembly-CSharp
-        m_MethodName: StartTimer
+        m_MethodName: StopTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -10,7 +10,7 @@ public class UITimer : MonoBehaviour
     private void Start()
     {
         Timer = 0;
-        playing = false;
+        playing = true;
     }
 
     void Update()
