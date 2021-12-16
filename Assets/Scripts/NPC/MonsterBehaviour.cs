@@ -146,6 +146,8 @@ public class MonsterBehaviour : Entity
             if (vfxExplosion) {
                 Instantiate(vfxExplosion, transform.position, Quaternion.identity);
             }
+            GameObject gameOver = GameObject.FindWithTag("GameOver");
+            gameOver.GetComponent<GameOver>().enemyKilled += 1;
             Destroy(this.gameObject);
         }
     }
