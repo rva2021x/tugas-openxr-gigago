@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6195128316220201012}
   - component: {fileID: 53174694979417606}
   - component: {fileID: 1045424327252385420}
+  - component: {fileID: 3225066401293269981}
   m_Layer: 6
   m_Name: Steam
   m_TagString: Magic
@@ -57,12 +58,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533138625715334}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.32019776
-  m_Height: 2.5914142
-  m_Direction: 0
-  m_Center: {x: -1.75, y: 0, z: 0}
+  m_Height: 2.73
+  m_Direction: 2
+  m_Center: {x: -0, y: 0, z: 1.24}
 --- !u!135 &53174694979417606
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -71,11 +72,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533138625715334}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: -2.28, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 2.72}
 --- !u!82 &1045424327252385420
 AudioSource:
   m_ObjectHideFlags: 0
@@ -172,6 +173,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &3225066401293269981
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533138625715334}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3146836787369543700
 GameObject:
   m_ObjectHideFlags: 0

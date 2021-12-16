@@ -33,4 +33,12 @@ public class Projectile : MonoBehaviour
 			}
 		}
     }
+
+	private void OnTriggerStay(Collider other) {
+		if(magicType == Magic.wind) {
+            if(other.TryGetComponent<MonsterBehaviour>(out MonsterBehaviour mb)) {
+                mb.TakeDamage(Mathf.CeilToInt(5f * Time.deltaTime));
+			}
+		}
+	}
 }
