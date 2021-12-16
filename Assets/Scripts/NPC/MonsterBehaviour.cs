@@ -30,6 +30,8 @@ public class MonsterBehaviour : Entity
     bool walkPointSet;
     [SerializeField] private float walkPointRange;
 
+    [SerializeField] private AudioSource attackSound;
+
     //Attacking
     [SerializeField] private float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -125,6 +127,9 @@ public class MonsterBehaviour : Entity
             {
                 if(playerTransform.TryGetComponent(out PlayerBehaviour player)) {
                     player.health -= 10;
+				}
+				if (attackSound) {
+                    attackSound.Play();
 				}
             }
 
