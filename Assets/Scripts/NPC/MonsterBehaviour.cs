@@ -152,6 +152,8 @@ public class MonsterBehaviour : Entity
 
     private void MonsterDie()
     {
+        GameObject gameOver = GameObject.FindWithTag("GameOver");
+        gameOver.GetComponent<GameOver>().enemyKilled += 1;
         agent.speed = 0f;
         Destroy(gameObject);
     }

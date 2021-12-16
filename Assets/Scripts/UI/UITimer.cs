@@ -48,4 +48,8 @@ public class UITimer : MonoBehaviour
     {
         playing = true;
     }
+
+    public float GetTimer(){
+        return Timer;
+    }
 }

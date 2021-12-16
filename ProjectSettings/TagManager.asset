@@ -9,6 +9,7 @@ TagManager:
   - Fire
   - TrainingTarget
   - Waypoint
+  - GameOver
   layers:
   - Default
   - TransparentFX
