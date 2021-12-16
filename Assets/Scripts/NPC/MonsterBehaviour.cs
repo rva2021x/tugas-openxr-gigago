@@ -59,15 +59,19 @@ public class MonsterBehaviour : Entity
 
     private bool isPause;
     private float tempSpeed;
+    private float animatorSpeed;
     public void Pause() {
         isPause = true;
         tempSpeed = agent.speed;
         agent.speed = 0;
+        animatorSpeed = monsterAnimator.CharacterAnimator.speed;
+        monsterAnimator.CharacterAnimator.speed = 0;
 	}
 
     public void Resume() {
         isPause = false;
         agent.speed = tempSpeed;
+        monsterAnimator.CharacterAnimator.speed = animatorSpeed;
     }
 
     private void Update()
