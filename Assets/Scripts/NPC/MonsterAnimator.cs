@@ -4,6 +4,12 @@ public class MonsterAnimator : MonoBehaviour
 {
     [SerializeField] private Animator characaterAnimator;
 
+    public Animator CharacterAnimator {
+		get {
+            return characaterAnimator;
+		}
+	}
+
     void Start()
     {
         characaterAnimator = GetComponent<Animator>();
