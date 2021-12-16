@@ -62,7 +62,7 @@ namespace UI {
 			if(currentTime > maxTime) {
 				currentTime = maxTime;
 			} else {
-				currentTime += Time.deltaTime;
+				currentTime += Time.unscaledDeltaTime;
 			}
 			if (isPressed) {
 				interactable.transform.position = WorldPassivePosition + toActiveAnimation.Evaluate(currentTime/maxTime) * (WorldActivePosition - WorldPassivePosition);

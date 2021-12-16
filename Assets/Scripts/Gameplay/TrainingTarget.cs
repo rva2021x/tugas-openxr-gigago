@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class TrainingTarget : MonoBehaviour
 {
+    [SerializeField] private GameObject vfxExplosion;
+
     private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag == "Magic")
+        if(other.gameObject.tag == "Magic") {
+			if (vfxExplosion) {
+                Instantiate(vfxExplosion, transform.position, Quaternion.identity);
+			}
             Destroy(this.gameObject);    
+		}
     }
 
     public void kill(){
@@ -17,6 +23,9 @@ public class TrainingTarget : MonoBehaviour
     IEnumerator Delay(float t)
     {
         yield return new WaitForSeconds(t);
+        if (vfxExplosion) {
+            Instantiate(vfxExplosion, transform.position, Quaternion.identity);
+        }
         Destroy(this.gameObject);   
     }
 }

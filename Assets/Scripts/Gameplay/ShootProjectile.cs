@@ -16,7 +16,7 @@ public class ShootProjectile : MonoBehaviour
     }
     public void setFirePoint(Vector3 pos)
     {
-        firePoint.position = pos;
+        firePoint.localPosition = pos;
     }
 
     public void Shoot()
@@ -47,11 +47,11 @@ public class ShootProjectile : MonoBehaviour
             else if (currentProjectile.GetComponent<Projectile>().magicType == Projectile.Magic.wind)
             {
                 projectileObj.transform.parent = firePoint.parent;
-                projectileObj.transform.localRotation = Quaternion.LookRotation((destination - firePoint.position).normalized, Vector3.up);
+                projectileObj.transform.rotation = Quaternion.LookRotation((destination - firePoint.position).normalized, Vector3.up);
             }
             else
             {
-                projectileObj.transform.localRotation = Quaternion.LookRotation((destination - firePoint.position).normalized, Vector3.up);
+                projectileObj.transform.rotation = Quaternion.LookRotation((destination - firePoint.position).normalized, Vector3.up);
                 projectileObj.GetComponent<Rigidbody>().velocity = (destination - firePoint.position).normalized * projectileSpeed;
             }
         }
