@@ -921,6 +921,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a157aac9923dbf54bb0f3f064fa883f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 20
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   monsterAnimator: {fileID: 0}
   agent: {fileID: 0}
   playerTransform: {fileID: 0}
@@ -928,7 +935,6 @@ MonoBehaviour:
   rangeSpeedAttack: 32
   projectileAttack: {fileID: 7447614972333886104, guid: 20e6d4a0a0b6eda4eb0e203e42e3a68e, type: 3}
   attackPosition: {fileID: 584154955}
-  health: 100
   walkSpeed: 4
   runSpeed: 8
   vfxExplosion: {fileID: 2142601126350313171, guid: 9709ffe09c801cd489159ff1a9e1d294, type: 3}

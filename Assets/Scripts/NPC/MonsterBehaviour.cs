@@ -3,7 +3,7 @@ using Gameplay;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterBehaviour : MonoBehaviour
+public class MonsterBehaviour : Entity
 {
     [SerializeField] private MonsterAnimator monsterAnimator;
     [SerializeField] private NavMeshAgent agent;
@@ -14,7 +14,6 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private GameObject projectileAttack;
     [SerializeField] private Transform attackPosition;
     private Vector3 target;
-    [SerializeField] private float health;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private GameObject vfxExplosion;
@@ -143,9 +142,11 @@ public class MonsterBehaviour : MonoBehaviour
     {
         agent.speed = 0f;
         health -= damage;
-        if(health < 0)
-        {
-            Invoke(nameof(TakeDamage), 0.5f);
+        if(health <= 0) {
+            if (vfxExplosion) {
+                Instantiate(vfxExplosion, transform.position, Quaternion.identity);
+            }
+            Destroy(this.gameObject);
         }
     }
 
@@ -171,10 +172,7 @@ public class MonsterBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Magic") {
-            if (vfxExplosion) {
-                Instantiate(vfxExplosion, transform.position, Quaternion.identity);
-            }
-            Destroy(this.gameObject);
+            TakeDamage(10);
         }
     }
 
