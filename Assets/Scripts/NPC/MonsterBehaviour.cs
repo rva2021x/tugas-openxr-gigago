@@ -79,6 +79,7 @@ public class MonsterBehaviour : MonoBehaviour
 
         if(Vector3.Distance(transform.position, target) < 1)
             IterateWaypointIndex();
+        Debug.Log("Patrolling");
     }
 
     private void ChasePlayer()
@@ -86,22 +87,29 @@ public class MonsterBehaviour : MonoBehaviour
         agent.speed = runSpeed;
 
         agent.SetDestination(playerTransform.position);
-        monsterAnimator.CharacterWalk();
         monsterAnimator.CharacterFoundEnemy();
+
+        monsterAnimator.CharacterWalk();
+        Debug.Log("Chase Player");
+
     }
     private void AttackPlayer()
     {
-        agent.speed = 0f;
         agent.SetDestination(transform.position);
         transform.LookAt(playerTransform);
+        Debug.Log("Attack Player");
 
-        if(!alreadyAttacked)
+        if (!alreadyAttacked)
         {
+            monsterAnimator.CharacterAttackEnemy();
+
             //Attack Projectile
-            if (rangeAttack && !alreadyAttacked)
+            if (rangeAttack)
             {
+                Idle();
                 Rigidbody rigidbody = Instantiate(projectileAttack, attackPosition.position, Quaternion.identity).GetComponent<Rigidbody>();
                 rigidbody.AddForce(transform.forward * 32f, ForceMode.Impulse);
+                Debug.Log("Attacking Player");
             }
 
             //Attack Melee
@@ -110,7 +118,6 @@ public class MonsterBehaviour : MonoBehaviour
 
             }
 
-            monsterAnimator.CharacterAttackEnemy();
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }

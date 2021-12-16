@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.2
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.06666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -366,6 +366,25 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &204608885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5983938971373626405, guid: 3081a7449e719a4408ad6f419d3103f4, type: 3}
+  m_PrefabInstance: {fileID: 1584947488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &204608886
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204608885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &235847340 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7349766712023350560, guid: 3cc52c00d082b0b4a91897cd5bdf0c85, type: 3}
@@ -2234,9 +2253,17 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9125568369406424549, guid: 871425cee08e7304faaecc65aee8314f, type: 3}
+      propertyPath: attackPosition
+      value: 
+      objectReference: {fileID: 880518917}
+    - target: {fileID: 9125568369406424549, guid: 871425cee08e7304faaecc65aee8314f, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 104397710}
+    - target: {fileID: 9125568369406424549, guid: 871425cee08e7304faaecc65aee8314f, type: 3}
+      propertyPath: projectileAttack
+      value: 
+      objectReference: {fileID: 880518916}
     - target: {fileID: 9125568369406424549, guid: 871425cee08e7304faaecc65aee8314f, type: 3}
       propertyPath: waypoint.Array.data[0]
       value: 
@@ -3475,6 +3502,36 @@ MonoBehaviour:
       m_SingletonActionBindings: []
     m_Reference: {fileID: 875253871413052681, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!1 &880518916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 880518917}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &880518917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880518916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1643818969}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &885907263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4576,6 +4633,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard
       objectReference: {fileID: 0}
+    - target: {fileID: 4888942306538752542, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5229474718233350311, guid: 0827c75fdce5b764cbec115e80dd3866, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5135,11 +5196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5983938971373626409, guid: 3081a7449e719a4408ad6f419d3103f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5983938971373626409, guid: 3081a7449e719a4408ad6f419d3103f4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.65
+      value: -7.3
       objectReference: {fileID: 0}
     - target: {fileID: 5983938971373626409, guid: 3081a7449e719a4408ad6f419d3103f4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5167,6 +5228,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5983938971373626409, guid: 3081a7449e719a4408ad6f419d3103f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900960636940568730, guid: 3081a7449e719a4408ad6f419d3103f4, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
